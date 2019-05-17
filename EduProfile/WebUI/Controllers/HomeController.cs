@@ -15,11 +15,10 @@ namespace WebUI.Controllers
         public IActionResult Index()
         {
             User usr = new User() { Birth = DateTime.Now, CreatedAt = DateTime.Now, Email = "burakozn@gmail.com", LastName = "OZEN", Name = "Ahmet", CreatedBy = "Burak", PictureURL = "asdas", Password = "124", UpdatedAt = DateTime.Now, UpdatedBy = ".can" };
-            BaseRepository<User> br = new BaseRepository<User>();
 
             //var a = br.Add(usr);
             //a.Wait();
-            var test = br.Get();
+            var test = UserRepository.Instance.Get();
             test.Wait();
             List<User> users = test.Result;
             return View();

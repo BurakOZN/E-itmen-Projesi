@@ -1,4 +1,5 @@
 ﻿using DAL;
+using Entity.DataModel;
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
@@ -7,10 +8,20 @@ using System.Threading.Tasks;
 
 namespace BLL.Repository
 {
-    public class BaseRepository<T> : IRepository<T>
+    public class BaseRepository<T> : IRepository<T> where T : BaseEntity
     {
         IMongoCollection<T> Collection { get { return Context.Instance.database.GetCollection<T>(typeof(T).Name); } }
-        
+
+        private static BaseRepository<T> instence = null;
+
+        public static BaseRepository<T> Instance
+        {
+            get
+            {
+                return instence ?? new BaseRepository<T>();
+            }
+        }
+
         public Task Add(T entity)
         {
             var a = Collection.InsertOneAsync(entity);
@@ -25,7 +36,7 @@ namespace BLL.Repository
 
         public async Task<List<T>> Get()
         {
-            var filter = Builders<T>.Filter.Empty;;
+            var filter = Builders<T>.Filter.Empty; ;
             var a = await Collection.Find(filter).ToListAsync();
             return a;
         }
