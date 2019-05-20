@@ -11,22 +11,23 @@ namespace WebUI.Controllers
 {
     public class AccountController : Controller
     {
-        private IRepository<User> _userRep;
-        public AccountController(IRepository<User> br)
+        private IUserManager userManager;
+        public AccountController(IUserManager userManager)
         {
-            _userRep = br;
+            this.userManager = userManager;
         }
+ 
         [HttpGet]
         public async Task<IActionResult> Login()
         {
-            UserManager um = new UserManager(_userRep);
-            User user= um.Find(x => x.Email == "burakozn@gmail.com" && x.Id== "5cdc21af4d3c8d15d83d6cca");
+       
             return await Task.Run(()=>View());
         }
         [HttpPost]
         public async Task<IActionResult> Login(User user)
         {
-
+            Login().Wait();
+            StateUserM s = await userManager.AddUser(user); // 
             return await Task.Run(() => View());
         }
 

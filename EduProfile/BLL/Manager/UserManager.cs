@@ -9,7 +9,11 @@ using System.Threading.Tasks;
 
 namespace BLL.Manager
 {
-    public class UserManager
+    public interface IUserManager {
+        Task<StateUserM> AddUser(User user);
+        User Find(Expression<Func<User, bool>> where);
+    }
+    public class UserManager:IUserManager
     {
         private IRepository<User> _repository;
         public UserManager(IRepository<User> userRep)
