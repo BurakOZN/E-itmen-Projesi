@@ -28,7 +28,10 @@ namespace WebUI.Controllers
             List<User> users = test.Result;
             return View();
         }
-
+        public IActionResult Detail()
+        {
+            return View();
+        }
         public IActionResult Privacy()
         {
             return View();
