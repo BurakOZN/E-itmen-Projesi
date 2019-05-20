@@ -232,4 +232,9 @@
     <None Include="Content\ForDetail\.sass-cache\e3f0abe5a50a2c3ad008c358edf35823ae2707ca\_vendor-prefixes.scssc" />
   </ItemGroup>
 
+
+  <ItemGroup>
+    <Folder Include="Views\Shared\" />
+  </ItemGroup>
+
 </Project>
